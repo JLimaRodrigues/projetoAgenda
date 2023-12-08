@@ -12,16 +12,12 @@ exports.registrar = async (req, res) => {
     
         if(login.errors.length > 0){
             req.flash('errors', login.errors);
-            req.session.save(function(){
-               return res.redirect('/login');
-            });
+            req.session.save(() => res.redirect(req.get('referer')));
             return;
         }
     
         req.flash('success', 'Seu usuário foi criado com sucesso.');
-        req.session.save(function(){
-           return res.redirect('/login');
-        });
+        req.session.save(() => res.redirect(req.get('referer')));
         return;
     } catch(e){
         console.log(e);
@@ -37,17 +33,13 @@ exports.logar = async (req, res) => {
     
         if(login.errors.length > 0){
             req.flash('errors', login.errors);
-            req.session.save(function(){
-               return res.redirect('/login');
-            });
+            req.session.save(() => res.redirect(req.get('referer')));
             return;
         }
     
         req.flash('success', 'Você logou no sistema.');
         req.session.user = login.user;
-        req.session.save(function(){
-           return res.redirect('/login');
-        });
+        req.session.save(() => res.redirect(req.get('referer')));
         return;
     } catch(e){
         console.log(e);

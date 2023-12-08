@@ -18,7 +18,7 @@ exports.registrar = async (req, res) => {
         }
     
         req.flash('success', 'Contato registrado com sucesso.');
-        req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
+        req.session.save(() => res.redirect(req.get('referer')));
         return;
     } catch(e){
         console.log(e);
@@ -34,4 +34,25 @@ exports.editarContato = async (req, res) => {
     if(!contato) return res.render('404');
 
     res.render('contato', { contato });
+}
+
+exports.editar = async (req, res) => {
+    try {
+        if(!req.params.id) return res.render('404');
+        const contato = new Contato(req.body);
+        await contato.editar(req.params.id)
+    
+        if(contato.errors.length > 0){
+            req.flash('errors', contato.errors);
+            req.session.save(() => res.redirect(req.get('referer')));
+            return;
+        }
+    
+        req.flash('success', 'Contato editado com sucesso.');
+        req.session.save(() => res.redirect(req.get('referer')));
+        return;
+    } catch(e){
+        console.log(e)
+        res.render('404');
+    }
 }

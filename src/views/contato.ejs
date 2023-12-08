@@ -11,7 +11,11 @@
 
           <%- include('includes/messages'); %>
 
-          <form action="/contato/registrar" method="POST">
+          <% if(contato._id) { %>
+            <form action="/contato/editar/<%= contato._id %>" method="POST">
+          <% } else { %>
+            <form action="/contato/registrar" method="POST">
+          <% } %>
             <div class="form-group">
               <label for="nome">Nome</label>
               <input value="<%= contato.nome %>" type="text" class="form-control" id="nome" name="nome">
