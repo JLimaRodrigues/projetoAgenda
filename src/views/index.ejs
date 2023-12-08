@@ -11,34 +11,28 @@
 
           <%- include('includes/messages'); %>
 
-          <div class="responsive-table">
-            <table class="table my-3">
-              <tr>
-                <td>Jefferson</td>
-                <td>Lima</td>
-                <td>23232323323</td>
-                <td>jeffersonlima147@hotmail.com</td>
-              </tr>
-              <tr>
-                <td>Jefferson</td>
-                <td>Lima</td>
-                <td>23232323323</td>
-                <td>jeffersonlima147@hotmail.com</td>
-              </tr>
-              <tr>
-                <td>Jefferson</td>
-                <td>Lima</td>
-                <td>23232323323</td>
-                <td>jeffersonlima147@hotmail.com</td>
-              </tr>
-              <tr>
-                <td>Jefferson</td>
-                <td>Lima</td>
-                <td>23232323323</td>
-                <td>jeffersonlima147@hotmail.com</td>
-              </tr>
-            </table>
-          </div>
+          <% if(contatos.length > 0) { %> 
+
+            <div class="responsive-table">
+              <table class="table my-3">
+                <% contatos.forEach( contato => { %>
+                  <tr>
+                    <td><%= contato.nome %></td>
+                    <td><%= contato.sobrenome %></td>
+                    <td><%= contato.telefone %></td>
+                    <td><%= contato.email %></td>
+                    <td>
+                      <a class="text-info" href="/contato/index/<%= contato._id %>" >Editar</a>
+                      <a class="text-danger" href="/contato/excluir/<%= contato._id %>" >Excluir</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </table>
+            </div>
+
+            <% } else { %> 
+              <p class="text-center lead">Não existem contatos na sua agenda</p>
+            <% } %>
         </div>
 
         <div class="col-lg-2"></div>

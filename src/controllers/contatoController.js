@@ -27,13 +27,18 @@ exports.registrar = async (req, res) => {
 }
 
 exports.editarContato = async (req, res) => {
-    if(!req.params.id) return res.render('404');
+    try {
+        if(!req.params.id) return res.render('404');
 
-    const contato = await Contato.buscaPorId(req.params.id);
-
-    if(!contato) return res.render('404');
-
-    res.render('contato', { contato });
+        const contato = await Contato.buscaPorId(req.params.id);
+    
+        if(!contato) return res.render('404');
+    
+        res.render('contato', { contato });
+    } catch(e){
+        console.log(e);
+        res.render('404');
+    }
 }
 
 exports.editar = async (req, res) => {
@@ -53,6 +58,22 @@ exports.editar = async (req, res) => {
         return;
     } catch(e){
         console.log(e)
+        res.render('404');
+    }
+}
+
+exports.excluir = async (req, res) => {
+    try {
+        if(!req.params.id) return res.render('404');
+
+        const contato = await Contato.deletar(req.params.id);
+    
+        if(!contato) return res.render('404');
+    
+        req.flash('success', 'Contato apagado com sucesso.');
+        res.redirect(req.get('referer'));
+    } catch(e) {
+        console.log(e);
         res.render('404');
     }
 }
