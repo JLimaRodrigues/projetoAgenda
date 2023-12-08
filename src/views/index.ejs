@@ -1,15 +1,50 @@
 <%- include('includes/header'); %>
+<%- include('includes/nav'); %>
 
-<section class="container">
-    <h1>
-      Lorem Ipsum
-    </h1>
-    <form action="/" method="post">
-      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-      <label for="nome">Nome</label>
-      <input type="text" name="nome" id="nome">
-      <button>Enviar</button>
-    </form>
-  </section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-3">
+          <h1 class="text-center">Agenda</h1>
+          <p class="text-center lead">Seus contatos estão abaixo.</p>
+
+          <div class="row">
+            <div class="col alert alert-danger my-3">Um erro qualquer</div>
+          </div>
+
+          <div class="responsive-table">
+            <table class="table my-3">
+              <tr>
+                <td>Jefferson</td>
+                <td>Lima</td>
+                <td>23232323323</td>
+                <td>jeffersonlima147@hotmail.com</td>
+              </tr>
+              <tr>
+                <td>Jefferson</td>
+                <td>Lima</td>
+                <td>23232323323</td>
+                <td>jeffersonlima147@hotmail.com</td>
+              </tr>
+              <tr>
+                <td>Jefferson</td>
+                <td>Lima</td>
+                <td>23232323323</td>
+                <td>jeffersonlima147@hotmail.com</td>
+              </tr>
+              <tr>
+                <td>Jefferson</td>
+                <td>Lima</td>
+                <td>23232323323</td>
+                <td>jeffersonlima147@hotmail.com</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
 
 <%- include('includes/footer'); %>
