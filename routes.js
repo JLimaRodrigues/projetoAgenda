@@ -1,7 +1,7 @@
 const express = require('express');
 const route   = express.Router();
 const homeController = require('./src/controllers/homeController');
-const contatoController = require('./src/controllers/contatoController');
+const loginController = require('./src/controllers/loginController');
 
 //         Criar   Ler   Atualizar Apagar
 // CRUD -> CREATE, READ, UPDATE,   DELETE
@@ -10,10 +10,10 @@ const contatoController = require('./src/controllers/contatoController');
 // http://meusite.com/ <- GET (para  o servidor) -> entregue a página
 
 //Rotas da Home
-route.get('/', homeController.paginaInicial);
-route.post('/', homeController.trataPost);
+route.get('/', homeController.index);
 
-//Rotas de Contato
-route.get('/contato', contatoController.paginaInicial);
+//rotas de Login
+route.get('/login', loginController.index);
+route.post('/login/registrar', loginController.registrar);
 
 module.exports = route;

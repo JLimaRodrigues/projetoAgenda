@@ -1,10 +1,6 @@
 exports.middlewareGlobal = (req, res, next) => { 
-    res.locals.variavelGlobal = "Está é uma variável global";
-
-    if(req.body.nome){
-        req.body.nome = req.body.nome.replace('Lima', 'Que nome brabo');
-        console.log(`Vi que você postou ${req.body.nome}`);
-    }
+    res.locals.errors = req.flash('errors');
+    res.locals.success = req.flash('success');
     next();
 };
 
@@ -14,9 +10,11 @@ exports.outroMiddleware = (req, res, next) => {
 };
 
 exports.checkCsrfError = (err, req, res, next) => {
-    if(err && 'EBADCSRFTOKEN' === err.code){
+    if(err){
         return res.render('404');
     }
+
+    next();
 }
 
 exports.csrfMiddleware = (req, res, next) => {
