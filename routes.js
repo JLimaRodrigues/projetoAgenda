@@ -1,7 +1,10 @@
-const express = require('express');
-const route   = express.Router();
-const homeController = require('./src/controllers/homeController');
-const loginController = require('./src/controllers/loginController');
+const express           = require('express');
+const route             = express.Router();
+const homeController    = require('./src/controllers/homeController');
+const loginController   = require('./src/controllers/loginController');
+const contatoController = require('./src/controllers/contatoController');
+
+const { loginRequired } = require('./src/middlewares/middleware');
 
 //         Criar   Ler   Atualizar Apagar
 // CRUD -> CREATE, READ, UPDATE,   DELETE
@@ -17,5 +20,10 @@ route.get('/login', loginController.index);
 route.post('/login/registrar', loginController.registrar);
 route.post('/login/logar', loginController.logar);
 route.get('/login/logout', loginController.logout);
+
+//rotas de contato
+route.get('/contato/index', loginRequired, contatoController.index);
+route.post('/contato/registrar', loginRequired, contatoController.registrar);
+route.get('/contato/index/:id', loginRequired, contatoController.editarContato);
 
 module.exports = route;
